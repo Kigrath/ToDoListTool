@@ -1,0 +1,14 @@
+{
+  "name": "todolisttool",
+  "version": "1.0.0",
+  "description": "A local ToDo list tool with nested tasks and JSON persistence.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
