@@ -1,3 +1,15 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "ad8ca1a4-0f37-485a-a5e3-33bb73d46d3c",
+      "title": "Test Task zum Abschließen",
+      "description": "",
+      "dueDate": "",
+      "priority": "medium",
+      "status": "done",
+      "done": true,
+      "createdAt": "2026-06-24T11:41:49.449Z",
+      "subtasks": []
+    }
+  ]
 }

@@ -1,6 +1,8 @@
 const taskForm = document.querySelector('#task-form');
-const taskList = document.querySelector('#task-list');
-const emptyState = document.querySelector('#empty-state');
+const taskListActive = document.querySelector('#task-list-active');
+const taskListCompleted = document.querySelector('#task-list-completed');
+const emptyStateActive = document.querySelector('#empty-state-active');
+const emptyStateCompleted = document.querySelector('#empty-state-completed');
 const stats = document.querySelector('#stats');
 const taskTemplate = document.querySelector('#task-template');
 const subtaskTemplate = document.querySelector('#subtask-template');
@@ -185,14 +187,11 @@ function attachSubtaskListDropZone(subtaskList, taskId) {
   });
 }
 
-function renderTasks() {
-  taskList.innerHTML = '';
-  const visibleTasks = getVisibleTasks();
-  const hasTasks = tasks.length !== 0;
-  emptyState.textContent = hasTasks ? 'Keine passenden Tasks für diese Filter.' : 'Noch keine Tasks vorhanden.';
-  emptyState.classList.toggle('hidden', hasTasks && visibleTasks.length !== 0);
+function renderTasksToContainer(containerList, emptyStateElement, tasksToRender) {
+  containerList.innerHTML = '';
+  emptyStateElement.classList.toggle('hidden', tasksToRender.length !== 0);
 
-  visibleTasks.forEach((task) => {
+  tasksToRender.forEach((task) => {
     const taskNode = taskTemplate.content.cloneNode(true);
     const article = taskNode.querySelector('.task-item');
     const title = taskNode.querySelector('.task-title');
@@ -326,8 +325,17 @@ function renderTasks() {
 
     attachSubtaskListDropZone(subtaskList, task.id);
 
-    taskList.appendChild(taskNode);
+    containerList.appendChild(taskNode);
   });
+}
+
+function renderTasks() {
+  const visibleTasks = getVisibleTasks();
+  const activeTasks = visibleTasks.filter((task) => task.status !== 'done');
+  const completedTasks = visibleTasks.filter((task) => task.status === 'done');
+
+  renderTasksToContainer(taskListActive, emptyStateActive, activeTasks);
+  renderTasksToContainer(taskListCompleted, emptyStateCompleted, completedTasks);
 
   renderStats();
 }
