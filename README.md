@@ -22,7 +22,9 @@ npm start
 
 Then open `http://localhost:3000`.
 
-## Docker
+## Container Setup
+
+### Docker
 
 Run the app with Docker Compose:
 
@@ -30,7 +32,17 @@ Run the app with Docker Compose:
 docker compose up --build
 ```
 
-This exposes the app on `http://localhost:3000` and mounts `./data` into the container so `data/todos.json` stays persistent on your machine.
+### Podman
+
+Run the app with Podman Compose:
+
+```bash
+podman-compose up --build
+```
+
+Both options expose the app on `http://localhost:3000` and mount `./data` into the container so `data/todos.json` stays persistent on your machine.
+
+**Note:** The same `docker-compose.yml` works with both Docker and Podman. If you don't have `podman-compose` installed, you can get it via `brew install podman-compose` (macOS) or `pip install podman-compose` (Linux).
 
 ## Data storage
 
